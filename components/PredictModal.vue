@@ -7,10 +7,6 @@
             <b-spinner v-else variant="primary" class="close" type="grow" label="Spinning" />
             <div ref="line" class="modal-box">
                 <h1 class="text-center">SmartIntentNN V{{ version }}</h1>
-                <h5 class="text-center">
-                    Powered by Tensorflow.js, the deep neural network is running on your Browser!
-                </h5>
-                <hr />
                 <p v-for="(item, index) in msgs" :key="index" v-html="item"></p>
                 <p v-if="id">
                     <a target="_blank" :href="url + id">See the ground truth: {{ address }}</a>
@@ -74,8 +70,8 @@ export default {
         async predict() {
             try {
                 this.loading = true
-                if (this.id) this.msg(`Dataset Id: ${this.id}`)
-                if (this.address) this.msg(`Contract Address: ${this.address}`)
+                if (this.id) this.msg(`<b>Dataset Id:</b> ${this.id}`)
+                if (this.address) this.msg(`<b>Contract Address:</b> ${this.address}`)
                 this.msg('Start to predict intents in the smart contract...')
 
                 this.msg('Embedding smart contract...')
@@ -95,16 +91,16 @@ export default {
                 const ys = model.predict($.tf.tensor([xs3])).arraySync()[0]
                 this.msg('Intent has been predicted.')
 
-                this.msg('============================================')
+                this.msg('<hr/>')
                 for (const i in ys)
                     this.msg(
                         `${
                             ys[i] >= 0.5
                                 ? '<span style="background: #dc3545;color: #fff;">'
                                 : '<span style="color: #28a745;">'
-                        }${intent[i]} ${ys[i]}${ys[i] >= 0.5 ? '</span>' : ''}`
+                        }<b>${intent[i]}:</b> ${ys[i]}</span>`
                     )
-                this.msg('============================================')
+                this.msg('<hr/>')
             } catch (e) {
                 console.error(e)
                 this.$bvToast.toast(e.message, {
@@ -119,23 +115,23 @@ export default {
         async predict2() {
             try {
                 this.loading = true
-                if (this.id) this.msg(`Dataset Id: ${this.id}`)
-                if (this.address) this.msg(`Contract Address: ${this.address}`)
+                if (this.id) this.msg(`<b>Dataset Id:</b> ${this.id}`)
+                if (this.address) this.msg(`<b>Contract Address:</b> ${this.address}`)
                 this.msg('Start to predict intents in the smart contract...')
                 const res = await $.post('data/predict', { code: this.content })
                 this.msg('Smart Contract intents are detected by <b>SmartBERT V2</b>!')
                 if (!res.results) throw new Error('No results predicted from server')
 
-                this.msg('============================================')
+                this.msg('<hr/>')
                 for (const item of res.results)
                     this.msg(
                         `${
                             item.score >= 0.5
                                 ? '<span style="background: #dc3545;color: #fff;">'
                                 : '<span style="color: #28a745;">'
-                        }${item.type}: ${item.score}</span>`
+                        }<b>${item.type}:</b> ${item.score}</span>`
                     )
-                this.msg('============================================')
+                this.msg('<hr/>')
             } catch (e) {
                 console.error(e)
                 this.$bvToast.toast(e.message, {
@@ -176,11 +172,11 @@ export default {
 
 .box-bg {
     padding: 1rem;
-    width: 70vw;
+    width: 80vw;
     max-width: 800px;
     min-width: 370px;
     border-radius: 1rem;
-    height: 75vh;
+    height: 80vh;
     max-height: 650px;
     background: rgba(0, 0, 0, 0.8);
     position: relative;
