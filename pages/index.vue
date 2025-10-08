@@ -131,7 +131,6 @@
 </template>
 
 <script>
-import { Promise } from 'bluebird'
 import $ from '~/utils/tool'
 import option from '~/utils/option'
 
@@ -176,12 +175,7 @@ export default {
                     this.option.series[0].tooltip.padding = 0
                     this.option.series[0].tooltip.borderWidth = 0
                     // generate code tree
-                    const getCodeMap = () => {
-                        return new Promise(resolve => {
-                            resolve($.getCodeMap($.clearCode(this.content, this.type)))
-                        })
-                    }
-                    const tree = await getCodeMap().timeout(1000)
+                    const tree = res.codeTree
                     // generate code snippets template for charts
                     for (const i in tree)
                         for (const j in tree[i]) this.tree.push({ key: i + j, code: tree[i][j] })
