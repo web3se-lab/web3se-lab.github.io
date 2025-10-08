@@ -122,31 +122,18 @@ export default {
                 if (this.id) this.msg(`Dataset Id: ${this.id}`)
                 if (this.address) this.msg(`Contract Address: ${this.address}`)
                 this.msg('Start to predict intents in the smart contract...')
-
-                this.msg('Embedding smart contract...')
-                const res = await $.post('smartbert/embed', { code: this.content, pool: 'avg' })
-                this.msg('Smart Contract context is embedded by <b>SmartBERT</b> v2!')
-
-                const xs = []
-                Object.values(res).forEach(innerObj =>
-                    Object.values(innerObj).forEach(value => xs.push(value))
-                )
-                const xs2 = this.padding(xs, 256, 768)
-
-                this.msg('BiLSTM-based DNN model is loading...')
-                const model = await $.tf.loadGraphModel('smartbert-bilstm/model.json')
-                this.msg('DNN model is predicting intents...')
-                const ys = (await model.executeAsync($.tf.tensor([xs2]))).arraySync()[0]
-                this.msg('Intent has been predicted.')
+                const res = await $.post('data/predict', { code: this.content })
+                this.msg('Smart Contract intents are detected by <b>SmartBERT V2</b>!')
+                if (!res.results) throw new Error('No results predicted from server')
 
                 this.msg('============================================')
-                for (const i in ys)
+                for (const item of res.results)
                     this.msg(
                         `${
-                            ys[i] >= 0.5
+                            item.score >= 0.5
                                 ? '<span style="background: #dc3545;color: #fff;">'
                                 : '<span style="color: #28a745;">'
-                        }${intent[i]} ${ys[i]}${ys[i] >= 0.5 ? '</span>' : ''}`
+                        }${item.type}: ${item.score}</span>`
                     )
                 this.msg('============================================')
             } catch (e) {
