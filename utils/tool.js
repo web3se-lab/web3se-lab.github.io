@@ -6,7 +6,7 @@ import kJson from '~/utils/kmeans-model.json'
 kJson.distanceFunction = KMeans.cosineDistance
 
 let URL = 'http://10.144.1.2:8081'
-if (process.env.NODE_ENV !== 'development') URL = 'https://api.smart.cas-ll.cn'
+if (process.env.NODE_ENV !== 'development') URL = 'https://web3.devil.ren'
 
 export default {
     async get(ctl, params) {
