@@ -2,7 +2,7 @@
     <div class="index">
         <b-navbar toggleable="lg" type="dark" variant="primary" sticky>
             <b-navbar-brand href="#" class="logo">
-                <b>SmartIntentNN</b>
+                <b>SmartIntent</b>
                 <b-badge class="version" variant="danger">V2.0</b-badge>
             </b-navbar-brand>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -11,9 +11,11 @@
                     <b-nav-item active>Detect</b-nav-item>
                     <b-nav-item href="highlight">Highlight</b-nav-item>
                     <b-nav-item href="evaluate">Evaluate</b-nav-item>
+                    <!--
                     <b-nav-item href="https://github.com/web3se-lab/web3-sekit" target="_blank">
                         GitHub
                     </b-nav-item>
+                    -->
                 </b-navbar-nav>
 
                 <!-- Right aligned nav items -->
@@ -110,11 +112,13 @@
             </div>
         </div>
         <footer class="text-center footer">
+            <!--
             <p>
                 Powered by
                 <a href="https://www.tensorflow.org/js" target="_blank">Tensorflow.js</a>, Developed
                 By <a href="https://www.devil.ren" target="_blank">Youwei Huang</a>
             </p>
+            -->
         </footer>
 
         <div v-show="false">
