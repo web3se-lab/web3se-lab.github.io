@@ -11,11 +11,9 @@
                     <b-nav-item active>Detect</b-nav-item>
                     <b-nav-item href="highlight">Highlight</b-nav-item>
                     <b-nav-item href="evaluate">Evaluate</b-nav-item>
-                    <!--
                     <b-nav-item href="https://github.com/web3se-lab/web3-sekit" target="_blank">
                         GitHub
                     </b-nav-item>
-                    -->
                 </b-navbar-nav>
 
                 <!-- Right aligned nav items -->
@@ -112,13 +110,7 @@
             </div>
         </div>
         <footer class="text-center footer">
-            <!--
-            <p>
-                Powered by
-                <a href="https://www.tensorflow.org/js" target="_blank">Tensorflow.js</a>, Developed
-                By <a href="https://www.devil.ren" target="_blank">Youwei Huang</a>
-            </p>
-            -->
+            <p>Developed by <a href="https://www.devil.ren" target="_blank">Youwei Huang</a></p>
         </footer>
 
         <div v-show="false">
